@@ -62,6 +62,16 @@ var TodoActions = {
   },
 
   /**
+   *
+   */
+  caseLooper: function(id) {
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.TODO_CASE_LOOPER,
+      id: id
+    });
+  },
+
+  /**
    * @param  {string} id
    */
   destroy: function(id) {
