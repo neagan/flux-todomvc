@@ -58,6 +58,8 @@ function updateAll(updates) {
   }
 }
 
+// Tile casing function from
+// http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
 function caseLooper(id) {
   if (_todos[id].case === 1) {
     _todos[id].text = _todos[id].text.replace(/\w\S*/g, function(txt) {
