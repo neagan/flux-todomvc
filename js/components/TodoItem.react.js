@@ -64,6 +64,7 @@ var TodoItem = React.createClass({
           <label onDoubleClick={this._onDoubleClick}>
             {todo.text}
           </label>
+          <button className="looper" onClick={this._onLooperClick} />
           <button className="destroy" onClick={this._onDestroyClick} />
         </div>
         {input}
@@ -88,6 +89,11 @@ var TodoItem = React.createClass({
   _onSave: function(text) {
     TodoActions.updateText(this.props.todo.id, text);
     this.setState({isEditing: false});
+  },
+
+  //Looper click call
+  _onLooperClick: function() {
+    TodoActions.caseLooper(this.props.todo.id);
   },
 
   _onDestroyClick: function() {

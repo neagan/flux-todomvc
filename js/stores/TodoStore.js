@@ -30,7 +30,8 @@ function create(text) {
   _todos[id] = {
     id: id,
     complete: false,
-    text: text
+    text: text,
+    case: 0
   };
 }
 
@@ -57,11 +58,29 @@ function updateAll(updates) {
   }
 }
 
+// Tile casing function from
+// http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+function caseLooper(id) {
+  if (_todos[id].case === 1) {
+    _todos[id].text = _todos[id].text.replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+    _todos[id].case++;
+  } else if (_todos[id].case === 2) {
+    _todos[id].text = _todos[id].text.toLowerCase();
+    _todos[id].case++;
+  } else {
+    _todos[id].text = _todos[id].text.toUpperCase();
+    _todos[id].case = 1;
+  }
+}
+
 /**
  * Delete a TODO item.
  * @param  {string} id
  */
 function destroy(id) {
+  console.log(_todos[id]);
   delete _todos[id];
 }
 
@@ -116,6 +135,12 @@ var TodoStore = assign({}, EventEmitter.prototype, {
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   }
+
+  /*
+   *
+   */
+
+
 });
 
 // Register callback to handle all updates
@@ -165,6 +190,11 @@ AppDispatcher.register(function(action) {
 
     case TodoConstants.TODO_DESTROY_COMPLETED:
       destroyCompleted();
+      TodoStore.emitChange();
+      break;
+
+    case TodoConstants.TODO_CASE_LOOPER:
+      caseLooper(action.id);
       TodoStore.emitChange();
       break;
 

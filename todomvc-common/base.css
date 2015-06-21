@@ -224,6 +224,7 @@ label[for='toggle-all'] {
 }
 
 #todo-list li .toggle:after {
+	/*content: 'x';*/
 	content: '✔';
 	/* 40 + a couple of pixels visual adjustment */
 	line-height: 43px;
@@ -255,14 +256,46 @@ label[for='toggle-all'] {
 	text-decoration: line-through;
 }
 
-#todo-list li .destroy {
+#todo-list li .looper {
 	display: none;
 	position: absolute;
 	top: 0;
 	right: 10px;
+	bottom: 20;
+	width: 40px;
+	height: 30px;
+	margin: auto 0;
+	font-size: 22px;
+	color: #3edbe7; /* New color */
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+#todo-list li .looper:hover {
+	text-shadow: 0 0 1px #000,
+				 0 0 10px rgba(199, 107, 107, 0.8);
+	-webkit-transform: scale(1.3);
+	-ms-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+#todo-list li .looper:after {
+	content: 'Aa';
+}
+
+#todo-list li:hover .looper {
+	display: block;
+}
+
+/* Original */
+#todo-list li .destroy {
+	display: none;
+	position: absolute;
+	top: 20;
+	right: 10px;
 	bottom: 0;
 	width: 40px;
-	height: 40px;
+	height: 30px;
 	margin: auto 0;
 	font-size: 22px;
 	color: #a88a8a;
